@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import ThirdPartyEmailPassword, {
-  ThirdPartyEmailPasswordAuth,
-} from "supertokens-auth-react/recipe/thirdpartyemailpassword";
+
 import dynamic from "next/dynamic";
+import Head from "next/head";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
+import ThirdPartyEmailPassword, {
+  ThirdPartyEmailPasswordAuth
+} from "supertokens-auth-react/recipe/thirdpartyemailpassword";
+
+import styles from "../styles/Home.module.css";
+
 import { getSupabase } from "@/libs/supabase";
 
 export default function Home() {
@@ -20,7 +23,7 @@ function ProtectedPage() {
   // retrieve the authenticated user's accessTokenPayload and userId from the sessionContext
   const sessionContext = useSessionContext();
 
-  if (sessionContext.loading === true) {
+  if (sessionContext.loading) {
     return null;
   }
 
@@ -92,8 +95,9 @@ function ProtectedPage() {
             alignItems: "center",
             justifyContent: "flex-end",
             paddingLeft: "75px",
-            paddingRight: "75px",
-          }}>
+            paddingRight: "75px"
+          }}
+        >
           <div
             onClick={logoutClicked}
             style={{
@@ -106,8 +110,9 @@ function ProtectedPage() {
               alignItems: "center",
               justifyContent: "center",
               color: "#ffffff",
-              fontWeight: "bold",
-            }}>
+              fontWeight: "bold"
+            }}
+          >
             SIGN OUT
           </div>
         </div>
@@ -118,8 +123,9 @@ function ProtectedPage() {
             alignItems: "center",
             justifyContent: "flex-end",
             paddingLeft: "75px",
-            paddingRight: "75px",
-          }}>
+            paddingRight: "75px"
+          }}
+        >
           <div
             onClick={fetchUserData}
             style={{
@@ -132,8 +138,9 @@ function ProtectedPage() {
               alignItems: "center",
               justifyContent: "center",
               color: "#ffffff",
-              fontWeight: "bold",
-            }}>
+              fontWeight: "bold"
+            }}
+          >
             FETCH USER API
           </div>
         </div>
@@ -156,7 +163,8 @@ function ProtectedPage() {
 
           <a
             href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}>
+            className={styles.card}
+          >
             <h3>Deploy &rarr;</h3>
             <p>Instantly deploy your Next.js site to a public URL with Vercel.</p>
           </a>
@@ -166,7 +174,8 @@ function ProtectedPage() {
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
-          rel="noopener noreferrer">
+          rel="noopener noreferrer"
+        >
           Powered by <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
         </a>
       </footer>

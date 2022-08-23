@@ -1,18 +1,26 @@
+import supertokens from "supertokens-node";
 import { superTokensNextWrapper } from "supertokens-node/nextjs";
 import { verifySession } from "supertokens-node/recipe/session/framework/express";
-import supertokens from "supertokens-node";
+
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import { backendConfig } from "@/config/backendConfig";
 import { getSupabase } from "@/libs/supabase";
 
 supertokens.init(backendConfig());
+
+type Data = any;
+type NextApiRequestWithSession = NextApiRequest & { session: any };
+
 /**
  * user
- * @param req
- * @param res
+ * @param req NextApiRequestWithSession
+ * @param res NextApiResponse
  */
-export default async function user(req: any, res: any) {
+export default async function user(req: NextApiRequestWithSession, res: NextApiResponse<Data>) {
   await superTokensNextWrapper(
     async (next) => {
+      // @ts-ignore
       return await verifySession()(req, res, next);
     },
     req,
@@ -34,6 +42,6 @@ export default async function user(req: any, res: any) {
     userId,
     email,
     sessionHandle: req.session.getHandle(),
-    accessTokenPayload,
+    accessTokenPayload
   });
 }

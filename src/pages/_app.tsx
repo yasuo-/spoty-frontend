@@ -1,18 +1,32 @@
-import '../styles/globals.css'
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+
 import SuperTokensReact, { SuperTokensWrapper } from "supertokens-auth-react";
-import * as SuperTokensConfig from "@/config/frontendConfig";
 import Session from "supertokens-auth-react/recipe/session";
 import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 
-import type { AppProps } from 'next/app'
+import type { AppProps } from "next/app";
 
+import * as SuperTokensConfig from "@/config/frontendConfig";
+import { AppProvider } from "@/providers/AppProvider";
+import "@/styles/globals.css";
+// eslint-disable-next-line import/order
+import { initMocks } from "@/mocks";
+
+// window
 if (typeof window !== "undefined") {
   SuperTokensReact.init(SuperTokensConfig.frontendConfig());
 }
 
-function MyApp({ Component, pageProps }: AppProps) {
+// mock
+initMocks();
+
+/**
+ * App
+ * @param Component
+ * @param pageProps
+ * @constructor
+ */
+function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     async function doRefresh() {
       if (pageProps.fromSupertokens === "needs-refresh") {
@@ -33,9 +47,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <SuperTokensWrapper>
-      <Component {...pageProps} />
+      <AppProvider>
+        <Component {...pageProps} />
+      </AppProvider>
     </SuperTokensWrapper>
-  )
+  );
 }
 
-export default MyApp
+export default App;

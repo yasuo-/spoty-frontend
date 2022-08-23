@@ -1,0 +1,7 @@
+src/mocks/**
+src/test/**
+*.test.*
+*.spec.*
+cypress/**
+**/**/*.test.*
+**/**/*.spec.*
