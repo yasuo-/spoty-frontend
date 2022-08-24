@@ -4,7 +4,7 @@ import SuperTokensReact, { SuperTokensWrapper } from "supertokens-auth-react";
 import Session from "supertokens-auth-react/recipe/session";
 import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 
-import type { AppProps } from "next/app";
+import type { AppProps, NextWebVitalsMetric } from "next/app";
 
 import * as SuperTokensConfig from "@/config/frontendConfig";
 import { AppProvider } from "@/providers/AppProvider";
@@ -19,6 +19,13 @@ if (typeof window !== "undefined") {
 
 // mock
 initMocks();
+
+// metrics
+export function reportWebVitals(metric: NextWebVitalsMetric) {
+  if (metric.label === "web-vital") {
+    console.log(metric);
+  }
+}
 
 /**
  * App
