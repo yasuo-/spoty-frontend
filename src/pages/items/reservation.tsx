@@ -1,5 +1,5 @@
 import React from "react";
 
-const ItemCreateReservation = () => {
+export default function ItemCreateReservation() {
   return <div>ItemCreateReservation</div>;
-};
+}

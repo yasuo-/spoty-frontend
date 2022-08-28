@@ -1,5 +1,5 @@
 import React from "react";
 
-const LocationDetail = () => {
+export default function LocationDetail() {
   return <div>LocationDetail</div>;
-};
+}
