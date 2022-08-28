@@ -17,7 +17,7 @@ type FormData = {
   address1: string;
 };
 
-const UserInfoInput = () => {
+export default function UserInfoInput() {
   const {
     register,
     handleSubmit,
@@ -114,4 +114,4 @@ const UserInfoInput = () => {
       </form>
     </ApplicationLayout>
   );
-};
+}
