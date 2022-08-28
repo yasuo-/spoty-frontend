@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+
 import { CONFIG } from "@/config";
 
 const getSupabase = (access_token: any) => {
@@ -8,7 +9,7 @@ const getSupabase = (access_token: any) => {
   supabase.auth.session = () => ({
     access_token,
     token_type: "",
-    user: null,
+    user: null
   });
 
   return supabase;

@@ -2,6 +2,7 @@ import React from "react";
 
 import { ErrorBoundary } from "react-error-boundary";
 import { I18nextProvider } from "react-i18next";
+import { ThirdPartyEmailPasswordAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 
 import { Spinner } from "@/components/Elements/Loader/Spinner";
 import { ErrorFallback } from "@/components/Error";
@@ -20,7 +21,9 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   return (
     <I18nextProvider i18n={i18n}>
       <React.Suspense fallback={<Spinner />}>
-        <ErrorBoundary FallbackComponent={ErrorFallback}>{children}</ErrorBoundary>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <ThirdPartyEmailPasswordAuth>{children}</ThirdPartyEmailPasswordAuth>
+        </ErrorBoundary>
       </React.Suspense>
     </I18nextProvider>
   );

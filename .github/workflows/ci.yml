@@ -12,12 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install dependencies
-      run: |
-        yarn install
-      - name: Build
-      run: |
-        yarn run build
-      - name: Test
-      run: |
-        yarn run test
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: 16.x
+          cache: npm
+      - run: yarn install
+      - name: Run Tests
+        run: yarn test

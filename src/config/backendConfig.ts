@@ -1,13 +1,15 @@
-import ThirdPartyEmailPasswordNode from "supertokens-node/recipe/thirdpartyemailpassword";
-import SessionNode from "supertokens-node/recipe/session";
-import { appInfo } from "./appInfo";
 import jwt from "jsonwebtoken";
-import { getSupabase } from "@/libs/supabase";
 import { TypeInput } from "supertokens-node/lib/build/types";
+import SessionNode from "supertokens-node/recipe/session";
+import ThirdPartyEmailPasswordNode from "supertokens-node/recipe/thirdpartyemailpassword";
 
-const SUPABASE_SIGNING_SECRET = process.env.SUPABASE_SIGNING_SECRET
-const SUPER_TOKENS_URI = process.env.SUPER_TOKENS_URI
-const SUPER_TOKENS_KEY = process.env.SUPER_TOKENS_CLIENT_ID
+import { appInfo } from "./appInfo";
+
+import { getSupabase } from "@/libs/supabase";
+
+const SUPABASE_SIGNING_SECRET = process.env.SUPABASE_SIGNING_SECRET!;
+const SUPER_TOKENS_URI = process.env.SUPER_TOKENS_URI!;
+const SUPER_TOKENS_KEY = process.env.SUPER_TOKENS_KEY!;
 
 export let backendConfig = (): TypeInput => {
   return {
@@ -15,7 +17,7 @@ export let backendConfig = (): TypeInput => {
     supertokens: {
       // @ts-ignore
       connectionURI: SUPER_TOKENS_URI,
-      apiKey: SUPER_TOKENS_KEY,
+      apiKey: SUPER_TOKENS_KEY
     },
     appInfo,
     recipeList: [
@@ -85,10 +87,10 @@ export let backendConfig = (): TypeInput => {
                 }
 
                 return response;
-              },
+              }
             };
-          },
-        },
+          }
+        }
       }),
       SessionNode.init({
         override: {
@@ -101,7 +103,7 @@ export let backendConfig = (): TypeInput => {
               createNewSession: async function (input) {
                 const payload = {
                   userId: input.userId,
-                  exp: Math.floor(Date.now() / 1000) + 60 * 60,
+                  exp: Math.floor(Date.now() / 1000) + 60 * 60
                 };
 
                 // @ts-ignore
@@ -109,16 +111,16 @@ export let backendConfig = (): TypeInput => {
 
                 input.accessTokenPayload = {
                   ...input.accessTokenPayload,
-                  supabase_token: supabase_jwt_token,
+                  supabase_token: supabase_jwt_token
                 };
 
                 return await originalImplementation.createNewSession(input);
-              },
+              }
             };
-          },
-        },
-      }),
+          }
+        }
+      })
     ],
-    isInServerlessEnv: true,
+    isInServerlessEnv: true
   };
 };

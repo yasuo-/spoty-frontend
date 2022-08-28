@@ -2,20 +2,22 @@ import React, { useState, useEffect } from "react";
 
 import dynamic from "next/dynamic";
 import Head from "next/head";
+import Link from "next/link";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
-import ThirdPartyEmailPassword, {
-  ThirdPartyEmailPasswordAuth
-} from "supertokens-auth-react/recipe/thirdpartyemailpassword";
+import ThirdPartyEmailPassword from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 
 import styles from "../styles/Home.module.css";
 
+import { SectionNews } from "@/components/Elements/Section/SectionNews";
+import { ApplicationLayout } from "@/components/Layout/Application";
+import { ROUTE_PATH } from "@/config";
 import { getSupabase } from "@/libs/supabase";
 
 export default function Home() {
   return (
-    <ThirdPartyEmailPasswordAuth>
+    <ApplicationLayout>
       <ProtectedPage />
-    </ThirdPartyEmailPasswordAuth>
+    </ApplicationLayout>
   );
 }
 
@@ -79,6 +81,10 @@ function ProtectedPage() {
       </Head>
 
       <main className={styles.main}>
+        <Link href={ROUTE_PATH.LOCATION} />
+
+        <SectionNews />
+
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
